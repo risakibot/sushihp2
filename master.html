@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大将紹介 | 鮨 凛 - RIN -</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-main: #f5f5f0;
+            --text-muted: #999999;
+            --accent-gold: #c5a059;
+            --border-color: #2a2a2a;
+            --font-ja: 'Noto Serif JP', serif;
+            --font-en: 'Cormorant Garamond', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-ja); background-color: var(--bg-color); color: var(--text-main); line-height: 2; letter-spacing: 0.12em; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        a:hover { color: var(--accent-gold); }
+        ul { list-style: none; }
+        .section { padding: 120px 5%; }
+        
+        .fade-in { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade-in.appear { opacity: 1; transform: translateY(0); }
+
+        /* ヘッダー（サブページ用：常にすりガラス） */
+        header { position: fixed; top: 0; width: 100%; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: all 0.4s; background-color: rgba(10, 10, 10, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); }
+        .logo { font-size: 1.5rem; font-weight: 500; letter-spacing: 0.3em; }
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-links a { font-size: 0.85rem; letter-spacing: 0.15em; }
+        .reserve-btn-nav { border: 1px solid var(--accent-gold); padding: 8px 24px; color: var(--accent-gold) !important; transition: all 0.4s ease; }
+        .reserve-btn-nav:hover { background-color: var(--accent-gold); color: var(--bg-color) !important; }
+
+        /* サブページのトップ画像 */
+        .sub-hero { height: 45vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(10,10,10,1)), url('https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 50px; }
+        .sub-hero-title { text-align: center; }
+        .sub-hero-title h1 { font-family: var(--font-en); font-size: 3.5rem; color: var(--accent-gold); letter-spacing: 0.1em; margin-bottom: 5px; }
+        .sub-hero-title span { font-size: 0.9rem; color: var(--text-muted); letter-spacing: 0.3em; display: block; }
+
+        /* プロフィールレイアウト */
+        .master-profile { display: flex; gap: 80px; align-items: flex-start; max-width: 1000px; margin: 0 auto; }
+        .master-img { flex: 1; position: relative; }
+        /* 職人の写真を渋いモノクロ調に自動加工 */
+        .master-img img { width: 100%; border-radius: 2px; filter: grayscale(60%) contrast(1.1); box-shadow: -20px 20px 0px var(--border-color); }
+        .master-text { flex: 1; }
+        
+        .master-role { color: var(--accent-gold); font-size: 0.9rem; letter-spacing: 0.2em; display: block; margin-bottom: 10px; }
+        .master-name { font-size: 2rem; font-weight: 300; letter-spacing: 0.2em; margin-bottom: 40px; }
+        .master-quote { font-size: 1.1rem; color: var(--text-main); line-height: 2; margin-bottom: 40px; font-weight: 300; border-left: 2px solid var(--accent-gold); padding-left: 20px; }
+        .master-text p { color: var(--text-muted); line-height: 2; margin-bottom: 25px; font-size: 0.95rem; text-align: justify; }
+
+        /* 経歴（タイムライン） */
+        .timeline { margin-top: 60px; }
+        .timeline h3 { font-family: var(--font-en); font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 30px; letter-spacing: 0.1em; }
+        .timeline-list { border-left: 1px solid var(--border-color); margin-left: 5px; padding-left: 25px; }
+        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item::before { content: ''; position: absolute; left: -29px; top: 10px; width: 7px; height: 7px; background: var(--accent-gold); border-radius: 50%; }
+        .timeline-year { font-family: var(--font-en); font-size: 1.2rem; color: var(--text-main); margin-bottom: 5px; letter-spacing: 0.1em; }
+        .timeline-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+
+        footer { text-align: center; padding: 40px; font-family: var(--font-en); font-size: 0.8rem; color: #555; letter-spacing: 0.2em; background-color: #050505; }
+
+        @media (max-width: 900px) {
+            .master-profile { flex-direction: column; gap: 60px; }
+            .master-img img { box-shadow: 10px 10px 0px var(--border-color); }
+        }
+        @media (max-width: 768px) {
+            header { padding: 15px; flex-direction: column; gap: 15px; }
+            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .reserve-btn-nav { display: none; }
+            .section { padding: 80px 5%; }
+            .sub-hero-title h1 { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">鮨 凛</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html#concept">こだわり</a></li>
+                <li><a href="index.html#menu">お品書き</a></li>
+                <li><a href="master.html">大将紹介</a></li>
+                <li><a href="index.html#access">アクセス</a></li>
+                <li><a href="index.html#reserve" class="reserve-btn-nav">WEB予約</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="sub-hero">
+        <div class="sub-hero-title fade-in">
+            <h1>Master</h1>
+            <span>大将紹介</span>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container fade-in">
+            <div class="master-profile">
+                <div class="master-img">
+                    <img src="https://images.unsplash.com/photo-1576236081075-810a95c96025?q=80&w=1000&auto=format&fit=crop" alt="店主 結城凛太郎">
+                </div>
+                <div class="master-text">
+                    <span class="master-role">店主</span>
+                    <h2 class="master-name">結城 凛太郎</h2>
+                    <p class="master-quote">「目の前のお客様に、ただ実直に、最高の一貫を握る。<br>その一瞬の感動のために、日々精進しております。」</p>
+                    
+                    <p>18歳で鮨の世界に入り、銀座の老舗名店にて15年間にわたり研鑽を積みました。<br>先人たちが築き上げた江戸前鮨の伝統技法を忠実に守りながらも、現代の味覚や感性に寄り添う独自の工夫を凝らした一貫を追求し続けています。</p>
+                    <p>毎朝自ら豊洲へ足を運び、魚の顔を見て、声を聞く。その日の天候や素材の状態に合わせて、シャリの温度や酢の加減、包丁の入れ方を微調整する。<br>奇をてらうことのない、当たり前の手仕事をどこまでも丁寧に行うことこそが、私の信条です。</p>
+                    <p>洗練された空間の中で、肩肘張らずに極上の時間をお楽しみいただけるよう、心からのおもてなしでお迎えいたします。</p>
+                    
+                    <div class="timeline">
+                        <h3>Career</h3>
+                        <div class="timeline-list">
+                            <div class="timeline-item">
+                                <div class="timeline-year">1985</div>
+                                <div class="timeline-desc">東京都に生まれる。幼少期より実家の鮮魚店で魚に触れて育つ。</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2003</div>
+                                <div class="timeline-desc">18歳で銀座の老舗「鮨〇〇」に入店。江戸前の基礎を徹底的に学ぶ。</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2015</div>
+                                <div class="timeline-desc">同店の副料理長に就任。長年にわたりカウンターで常連客の舌を唸らせる。</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2026</div>
+                                <div class="timeline-desc">独立し、自らの理想を追求する「鮨 凛 - RIN -」を開業。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Sushi RIN. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // ふわっと浮かび上がるアニメーション
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('appear');
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+    </script>
+</body>
+</html>
