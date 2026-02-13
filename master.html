@@ -48,10 +48,21 @@
         /* プロフィールレイアウト */
         .master-profile { display: flex; gap: 80px; align-items: flex-start; max-width: 1000px; margin: 0 auto; }
         .master-img { flex: 1; position: relative; }
-        /* 職人の写真を渋いモノクロ調に自動加工 */
-        .master-img img { width: 100%; border-radius: 2px; filter: grayscale(60%) contrast(1.1); box-shadow: -20px 20px 0px var(--border-color); }
-        .master-text { flex: 1; }
         
+        /* 💡 画像が表示されやすく、かつ美しく見えるようにCSSを強化しました */
+        .master-img img { 
+            width: 100%; 
+            height: auto;
+            aspect-ratio: 3 / 4; /* どんな画像を入れても美しい縦長の比率に自動調整 */
+            object-fit: cover;   /* 枠に合わせて綺麗にトリミング */
+            display: block;
+            border-radius: 2px; 
+            filter: grayscale(70%) contrast(1.15); /* 渋いモノクロ調に加工 */
+            box-shadow: -20px 20px 0px var(--border-color); /* お洒落な影（枠線） */
+            background-color: #1a1a1a; /* 画像読み込み中の背景色 */
+        }
+        
+        .master-text { flex: 1; }
         .master-role { color: var(--accent-gold); font-size: 0.9rem; letter-spacing: 0.2em; display: block; margin-bottom: 10px; }
         .master-name { font-size: 2rem; font-weight: 300; letter-spacing: 0.2em; margin-bottom: 40px; }
         .master-quote { font-size: 1.1rem; color: var(--text-main); line-height: 2; margin-bottom: 40px; font-weight: 300; border-left: 2px solid var(--accent-gold); padding-left: 20px; }
@@ -107,7 +118,7 @@
         <div class="container fade-in">
             <div class="master-profile">
                 <div class="master-img">
-                    <img src="https://images.unsplash.com/photo-1576236081075-810a95c96025?q=80&w=1000&auto=format&fit=crop" alt="店主 結城凛太郎">
+                    <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="店主 結城凛太郎">
                 </div>
                 <div class="master-text">
                     <span class="master-role">店主</span>
