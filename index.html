@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鮨 凛 - RIN - | 洗練された空間で味わう極上の一貫</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 基本設定 */
+        :root {
+            --bg-color: #0a0a0a;
+            --text-main: #f5f5f0;
+            --text-muted: #999999;
+            --accent-gold: #c5a059;
+            --section-bg: #121212;
+            --border-color: #2a2a2a;
+            --font-ja: 'Noto Serif JP', serif;
+            --font-en: 'Cormorant Garamond', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-ja); background-color: var(--bg-color); color: var(--text-main); line-height: 2; letter-spacing: 0.12em; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+        a:hover { color: var(--accent-gold); }
+        ul { list-style: none; }
+
+        /* ヘッダー */
+        header { position: fixed; top: 0; width: 100%; padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: all 0.4s ease; }
+        header.scrolled { padding: 15px 5%; background-color: rgba(10, 10, 10, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); }
+        .logo { font-size: 1.5rem; font-weight: 500; letter-spacing: 0.3em; }
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-links a { font-size: 0.85rem; letter-spacing: 0.15em; }
+        .reserve-btn-nav { border: 1px solid var(--accent-gold); padding: 8px 24px; color: var(--accent-gold) !important; transition: all 0.4s ease; }
+        .reserve-btn-nav:hover { background-color: var(--accent-gold); color: var(--bg-color) !important; }
+
+        /* トップ画像 */
+        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; display: flex; align-items: center; justify-content: center; position: relative; }
+        .hero-title { writing-mode: vertical-rl; text-orientation: upright; font-size: 2.8rem; font-weight: 300; letter-spacing: 0.6em; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.8); animation: fadeInSlow 2s ease-out forwards; opacity: 0; transform: translateY(30px); }
+        @keyframes fadeInSlow { to { opacity: 1; transform: translateY(0); } }
+        .scroll-down { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: var(--font-en); font-size: 0.9rem; letter-spacing: 0.2em; color: var(--text-muted); animation: bounce 2s infinite; }
+        .scroll-down::after { content: ''; width: 1px; height: 50px; background: linear-gradient(to bottom, var(--text-muted), transparent); }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); } 40% { transform: translate(-50%, -10px); } 60% { transform: translate(-50%, -5px); } }
+
+        /* 共通セクション */
+        .section { padding: 120px 5%; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .sec-header { text-align: center; margin-bottom: 80px; }
+        .sec-en { font-family: var(--font-en); font-size: 2rem; color: var(--accent-gold); display: block; margin-bottom: 5px; letter-spacing: 0.1em; }
+        .sec-ja { font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.3em; }
+
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade-in.appear { opacity: 1; transform: translateY(0); }
+
+        /* こだわり */
+        .concept-wrap { display: flex; align-items: center; gap: 80px; }
+        .concept-text { flex: 1; }
+        .concept-text h3 { font-size: 1.8rem; font-weight: 300; margin-bottom: 40px; line-height: 1.8; letter-spacing: 0.15em; }
+        .concept-text p { color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem; text-align: justify; }
+        .concept-img { flex: 1; position: relative; }
+        .concept-img img { width: 100%; height: auto; border-radius: 2px; filter: brightness(0.85); box-shadow: 20px 20px 0px var(--border-color); }
+
+        /* お品書き */
+        .menu-bg { background-color: var(--section-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+        .menu-list { max-width: 800px; margin: 0 auto; }
+        .menu-item { display: flex; justify-content: space-between; align-items: flex-end; padding: 40px 0; border-bottom: 1px solid var(--border-color); transition: border-color 0.4s; }
+        .menu-item:hover { border-color: var(--accent-gold); }
+        .menu-info { flex: 1; }
+        .menu-name { font-size: 1.4rem; font-weight: 400; margin-bottom: 10px; color: var(--text-main); letter-spacing: 0.15em; }
+        .menu-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
+        .menu-price { font-family: var(--font-en); font-size: 1.6rem; color: var(--accent-gold); margin-left: 30px; white-space: nowrap; }
+        .menu-note { text-align: center; margin-top: 50px; font-size: 0.8rem; color: #666; }
+
+        /* 大将紹介への誘導バナー */
+        .master-banner { padding: 150px 5%; text-align: center; background: linear-gradient(rgba(10,10,10,0.7), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1615361200141-f45040f367be?q=80&w=2000&auto=format&fit=crop') center/cover fixed; border-bottom: 1px solid var(--border-color); }
+        .master-banner .sec-en { font-family: var(--font-en); font-size: 2.5rem; color: var(--accent-gold); display: block; letter-spacing: 0.1em; }
+        .master-banner .sec-ja { font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.3em; display: block; margin-bottom: 30px; }
+        .master-banner h3 { font-size: 2rem; font-weight: 300; margin-bottom: 50px; letter-spacing: 0.2em; color: #fff; line-height: 1.6; }
+        .btn-outline { display: inline-block; padding: 16px 40px; border: 1px solid var(--accent-gold); color: var(--accent-gold); letter-spacing: 0.2em; transition: all 0.4s; font-size: 0.95rem; }
+        .btn-outline:hover { background: var(--accent-gold); color: var(--bg-color); }
+
+        /* アクセス（トップページ追加） */
+        .access-wrap { display: flex; gap: 60px; }
+        .access-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .shop-name { font-size: 1.6rem; letter-spacing: 0.2em; margin-bottom: 15px; font-weight: 400; color: var(--text-main); }
+        .address { color: var(--text-muted); margin-bottom: 40px; letter-spacing: 0.1em; line-height: 1.8; }
+        .info-dl { margin-bottom: 40px; }
+        .info-row { display: flex; padding: 15px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
+        .info-row dt { width: 120px; color: var(--accent-gold); font-weight: 400;}
+        .info-row dd { flex: 1; color: var(--text-muted); }
+        .access-route h5 { font-size: 1rem; color: var(--accent-gold); margin-bottom: 15px; font-weight: 400; letter-spacing: 0.1em; }
+        .access-route ul { color: var(--text-muted); font-size: 0.95rem; line-height: 2; padding-left: 0; }
+        .access-route li { position: relative; padding-left: 15px; margin-bottom: 10px; }
+        .access-route li::before { content: ''; position: absolute; left: 0; top: 12px; width: 4px; height: 4px; background-color: var(--accent-gold); border-radius: 50%; }
+        .access-map { flex: 1; min-height: 400px; }
+        .access-map iframe { width: 100%; height: 100%; min-height: 400px; border: none; filter: grayscale(100%) contrast(1.1); }
+
+        footer { text-align: center; padding: 40px; font-family: var(--font-en); font-size: 0.8rem; color: #555; letter-spacing: 0.2em; background-color: #050505; }
+
+        @media (max-width: 900px) {
+            .concept-wrap, .access-wrap { flex-direction: column; gap: 50px; }
+            .concept-img img { box-shadow: 10px 10px 0px var(--border-color); }
+        }
+        @media (max-width: 768px) {
+            header { padding: 20px; flex-direction: column; gap: 15px; background-color: rgba(10, 10, 10, 0.9); }
+            header.scrolled { padding: 15px; }
+            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .reserve-btn-nav { display: none; }
+            .hero-title { font-size: 2.2rem; }
+            .section { padding: 80px 5%; }
+            .master-banner { padding: 100px 5%; }
+            .master-banner h3 { font-size: 1.5rem; }
+            .menu-item { flex-direction: column; align-items: flex-start; gap: 15px; padding: 30px 0; }
+            .menu-price { margin-left: 0; }
+            .info-row { flex-direction: column; gap: 5px; }
+            .info-row dt { width: 100%; }
+            .access-map iframe { min-height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <a href="index.html" class="logo">鮨 凛</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#concept">こだわり</a></li>
+                <li><a href="#menu">お品書き</a></li>
+                <li><a href="master.html">大将紹介</a></li>
+                <li><a href="#access">アクセス</a></li>
+                <li><a href="#reserve" class="reserve-btn-nav">WEB予約</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 class="hero-title">静寂のなかで、<br>極上を味わう。</h1>
+        <div class="scroll-down">SCROLL</div>
+    </section>
+
+    <section id="concept" class="section">
+        <div class="container fade-in">
+            <div class="sec-header">
+                <span class="sec-en">Concept</span>
+                <span class="sec-ja">こだわり</span>
+            </div>
+            <div class="concept-wrap">
+                <div class="concept-text">
+                    <h3>記憶に刻まれる、<br>一貫の美学。</h3>
+                    <p>都会の喧騒から離れた路地裏にひっそりと佇む、「鮨 凛 - RIN -」。</p>
+                    <p>豊洲市場はもちろん、全国の漁港から直接仕入れる極上の海の幸。その日の天候や魚の状態を見極め、それぞれの素材が持つ旨味を最大限に引き出します。</p>
+                    <p>厳選した古米を使用し、独自のブレンドをした赤酢と塩のみで仕上げるこだわりのシャリ。ネタとの見事な調和、口の中でほどける温度と食感をご堪能ください。</p>
+                </div>
+                <div class="concept-img">
+                    <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1000&auto=format&fit=crop" alt="職人の技">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="section menu-bg">
+        <div class="container fade-in">
+            <div class="sec-header">
+                <span class="sec-en">Menu</span>
+                <span class="sec-ja">おまかせ</span>
+            </div>
+            <div class="menu-list">
+                <div class="menu-item">
+                    <div class="menu-info">
+                        <div class="menu-name">おまかせコース「雅 - MIYABI -」</div>
+                        <div class="menu-desc">先付 / 旬のつまみ五品 / 握り十二貫 / 玉子 / お椀<br>（旬の食材を贅沢に味わう、当店一番人気のコースです）</div>
+                    </div>
+                    <div class="menu-price">¥ 22,000</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-info">
+                        <div class="menu-name">おまかせコース「極 - KIWAMI -」</div>
+                        <div class="menu-desc">季節の酒肴七品 / 特上握り十五貫 / 雲丹の小丼 / 玉子 / お椀 / 甘味<br>（大トロや高級魚など、贅を尽くした極上コースです）</div>
+                    </div>
+                    <div class="menu-price">¥ 33,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="master-banner">
+        <div class="fade-in">
+            <span class="sec-en">Master</span>
+            <span class="sec-ja">大将紹介</span>
+            <h3>一貫に込める、<br>愚直なまでの情熱。</h3>
+            <a href="master.html" class="btn-outline">店主の想いを見る</a>
+        </div>
+    </section>
+
+    <section id="access" class="section">
+        <div class="container fade-in">
+            <div class="sec-header">
+                <span class="sec-en">Access</span>
+                <span class="sec-ja">店舗情報・アクセス</span>
+            </div>
+            <div class="access-wrap">
+                <div class="access-info">
+                    <h4 class="shop-name">鮨 凛 - RIN -</h4>
+                    <p class="address">〒104-0061<br>東京都中央区銀座 X-X-X 凛ビル B1F</p>
+                    
+                    <dl class="info-dl">
+                        <div class="info-row"><dt>営業時間</dt><dd>17:30 - 23:00 (最終入店 20:30)</dd></div>
+                        <div class="info-row"><dt>定休日</dt><dd>日曜日・祝日</dd></div>
+                        <div class="info-row"><dt>電話番号</dt><dd>03-XXXX-XXXX（完全予約制）</dd></div>
+                        <div class="info-row"><dt>お席</dt><dd>白木カウンター 8席 / 個室 1室</dd></div>
+                    </dl>
+
+                    <div class="access-route">
+                        <h5>最寄り駅からのアクセス</h5>
+                        <ul>
+                            <li>東京メトロ銀座線・丸ノ内線「銀座駅」A3出口より徒歩3分</li>
+                            <li>JR山手線「有楽町駅」銀座口より徒歩8分</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="access-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.139462228775!2d139.76214371525835!3d35.67355038019553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188be656e25f8b%3A0x6b8bc6214b6fcda4!2z6YqA5bqn6aeF!5e0!3m2!1sja!2sjp!4v1690000000000!5m2!1sja!2sjp" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Sushi RIN. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { header.classList.add('scrolled'); } 
+            else { header.classList.remove('scrolled'); }
+        });
+
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('appear');
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+    </script>
+</body>
+</html>
